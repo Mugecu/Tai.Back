@@ -1,11 +1,11 @@
 ﻿using Common.Entities;
 using System.Xml.Linq;
 
-namespace TaiProgramms.Domain
+namespace TaiProgramms.Entities
 {
     public class ShortDescription : ValueObject<ShortDescription>
     {
-        public string BriefDescription { get; init; }
+        public string BriefDescription { get;}
 
         public ShortDescription(string briefDescription)
         {

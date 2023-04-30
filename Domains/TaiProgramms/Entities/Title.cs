@@ -1,10 +1,10 @@
 ﻿using Common.Entities;
 
-namespace TaiProgramms.Domain
+namespace TaiProgramms.Entities
 {
     public class Title : ValueObject<Title>
     {
-        public string Name { get; init; }
+        public string Name { get;}
 
         public Title(string name)
         {
