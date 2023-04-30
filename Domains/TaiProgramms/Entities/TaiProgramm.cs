@@ -8,9 +8,8 @@ namespace TaiProgramms.Entities
         public ShortDescription ShortDescription { get; private set; }
         public Description Description { get; private set; }
 
-        public TaiProgramm(Guid id, Title title, ShortDescription shortDescription, Description description)
-        {
-            Id = id;
+        public TaiProgramm(Title title, ShortDescription shortDescription, Description description)
+        {            
             Title = title;
             ShortDescription = shortDescription;
             Description = description;

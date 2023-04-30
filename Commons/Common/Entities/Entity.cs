@@ -1,10 +1,10 @@
 ﻿namespace Common.Entities
 {
-    public abstract class Entity
+    public abstract class Entity : IEquatable<Entity>
     {
         public Guid Id { get; private set; }
 
-        public override bool Equals(object? obj)
+        public bool Equals(Entity? obj)
         {
             var entity = obj as Entity;
             if (ReferenceEquals(entity, null)) return false;
@@ -26,6 +26,12 @@
         public override int GetHashCode()
         {
             return (GetType().ToString() + Id).GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as Entity;
+            return Equals(other);
         }
     }
 }
