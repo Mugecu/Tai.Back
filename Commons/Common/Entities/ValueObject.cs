@@ -17,5 +17,19 @@
         }
 
         protected abstract int GetHashCodeCore();
+
+        public static bool operator ==(ValueObject<T> x, ValueObject<T> y)
+        {
+            if(ReferenceEquals(x, null) && ReferenceEquals(y, null))
+                return true;
+
+            if (ReferenceEquals(x, null) || ReferenceEquals(y, null))
+                return false;
+
+            return x.Equals(y);
+        }
+
+        public static bool operator != (ValueObject<T> x, ValueObject<T> y)
+            => !(x == y);
     }
 }
