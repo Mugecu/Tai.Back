@@ -2,7 +2,7 @@
 
 namespace Tai.Authentications.Services
 {
-    internal class DateTimeService : IDateTime
+    public class DateTimeService : IDateTime
     {
         private readonly DateTime _dateTime;
 
@@ -11,5 +11,8 @@ namespace Tai.Authentications.Services
 
         public DateTime GetDateTimeService()
             => _dateTime;
+
+        public DateTime Now()
+            => DateTime.Now;
     }
 }

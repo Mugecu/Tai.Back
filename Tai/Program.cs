@@ -1,6 +1,6 @@
 namespace Tai
 {
-    public class Program
+    public partial class Program
     {
         public static void Main(string[] args)
         {
@@ -12,6 +12,10 @@ namespace Tai
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            #region AddAuthServices
+            AddAuthenticateServices(builder);
+            #endregion
 
             var app = builder.Build();
 

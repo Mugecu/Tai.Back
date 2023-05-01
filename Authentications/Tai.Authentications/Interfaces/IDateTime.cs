@@ -3,5 +3,6 @@
     public interface IDateTime
     {
         public DateTime GetDateTimeService();
+        public DateTime Now();
     }
 }

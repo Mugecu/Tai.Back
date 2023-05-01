@@ -3,7 +3,7 @@ using Tai.Authentications.Entities.ValueObjects;
 
 namespace Tai.Authentications.Entities
 {
-    public class User : Entity
+    public class User : AggregateRoot
     {
         public UserNameSurname UserNameSurname { get; private set; }
         public UserLogin UserLogin { get; private set; }
