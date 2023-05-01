@@ -1,12 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Common.Entities;
+using Tai.Authentications.Guards;
 
 namespace Tai.Authentications.Entities.ValueObjects
 {
-    internal class UserEmail
+    public class UserEmail : ValueObject<UserEmail>
     {
+        public string EmailName { get; }
+        public string DomainName { get; }
+
+        public UserEmail(string emailName, string domainName)
+        {
+            EmailName = Guard.CheckStringValueOnNullEmptyAndWhiteSpace(emailName, "Пустое название почты");
+            DomainName = Guard.CheckStringValueOnNullEmptyAndWhiteSpace( domainName, "Пустое доменное имя.");
+        }
+
+        public UserEmail ChangeEmail(string emailName, string domainName)
+            => new UserEmail(emailName, domainName);
+
+        protected override bool EqualsCore(UserEmail valueObject)
+            => EmailName == valueObject.EmailName 
+                && DomainName == valueObject.DomainName;
+
+        protected override int GetHashCodeCore()
+            => GetHashCode();
     }
 }

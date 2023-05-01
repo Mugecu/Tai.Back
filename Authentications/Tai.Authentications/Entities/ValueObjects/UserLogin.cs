@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Tai.Authentications.Guards;
 
 namespace Tai.Authentications.Entities.ValueObjects
 {
-    internal class UserLogin
+    public class UserLogin
     {
+        public string Login { get; }
+
+        public UserLogin(string login)
+        {
+            Login = Guard.CheckStringValueOnNullEmptyAndWhiteSpace(login, "Пустое имя логина.");
+        }
+
+        public UserLogin ChangeLogin(string login)
+            => new UserLogin(login);
     }
 }
