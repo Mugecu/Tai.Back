@@ -1,15 +1,16 @@
 ﻿using Common.Entities;
 using Microsoft.EntityFrameworkCore;
 using Tai.Authentications.Entities;
+using Tai.Authentications.Infrastucture;
 
 namespace Tai.Authentications.Infrastructure.Repositories
 {
     public class UserRepository : Repository<User>
     {
         //добавить фабрику ORM вместо EF
-        private readonly DbContext _context;
+        private readonly TaiDbContext _context;
 
-        public UserRepository(DbContext context)
+        public UserRepository(TaiDbContext context)
         {
             _context = context;
         }

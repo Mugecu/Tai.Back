@@ -31,7 +31,7 @@ namespace Tai.Authentications.Services
                 issuer,
                 issuer,
                 claims,
-                expires: _dateTime.Now().Add(ExpiryDuration),
+                expires: _dateTime.Now.Add(ExpiryDuration),
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
