@@ -1,16 +1,17 @@
 ﻿using Common.Entities;
 using Tai.Authentications.Entities.ValueObjects;
 using Tai.Authentications.Guards;
+using Tai.Authentications.Interfaces;
 
 namespace Tai.Authentications.Entities
 {
     public class User : AggregateRoot
     {
-        public UserNameSurname UserNameSurname { get;  set; }
-        public UserLogin UserLogin { get;  set; }
-        public UserEmail UserEmail { get;  set; }
-        public UserPassword UserPassword { get;  set; }
-        public TimeStamp? TimeStamp { get;  set; }
+        public UserNameSurname UserNameSurname { get; set; }
+        public UserLogin UserLogin { get; set; }
+        public UserEmail UserEmail { get; set; }
+        public UserPassword UserPassword { get; set; }
+        public TimeStamp? TimeStamp { get; set; }
 
         private User() { }
 
@@ -32,20 +33,15 @@ namespace Tai.Authentications.Entities
             UserNameSurname userNameSurname,
             UserLogin userLogin,
             UserEmail userEmail,
-            UserPassword userPassword)
+            UserPassword userPassword,
+            IDateTime dateTime)
         {
             UserNameSurname = userNameSurname;
             UserLogin = userLogin;
             UserEmail = userEmail;
             UserPassword = userPassword;
-        }
 
-        public User SetTimeStamp(TimeStamp? timeStamp) 
-        {
-            if(timeStamp != null)
-                TimeStamp = timeStamp;
-
-            return this;
+            TimeStamp = new TimeStamp(dateTime);
         }
 
         public void RenameUser(string name, string surname)
@@ -59,5 +55,8 @@ namespace Tai.Authentications.Entities
 
         public void ChangeUserLogin(string login)
             => UserLogin.ChangeLogin(login);
+
+        public void SetTimeStamp(IDateTime dateTime)
+            => TimeStamp = new TimeStamp(dateTime);
     }
 }

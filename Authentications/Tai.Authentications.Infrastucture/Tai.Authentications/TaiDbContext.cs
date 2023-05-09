@@ -16,7 +16,7 @@ namespace Tai.Authentications.Infrastucture
             base.OnModelCreating(modelBuilder);
         }
 
-        private ModelBuilder CreateUserTable(ModelBuilder modelBuilder)
+        private static ModelBuilder CreateUserTable(ModelBuilder modelBuilder)
         {
             var jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto };
 
@@ -44,6 +44,7 @@ namespace Tai.Authentications.Infrastucture
                 .HasConversion(p => JsonConvert.SerializeObject(p, Formatting.Indented, jsonSettings),
                                p => JsonConvert.DeserializeObject<UserPassword>(p, jsonSettings));
 
+            //TODO:Добавить игнор сервиса IDateTime в TimeStamp
             modelBuilder.Entity<User>()
                 .Property(p => p.TimeStamp)
                 .HasConversion(p => JsonConvert.SerializeObject(p, Formatting.Indented, jsonSettings),

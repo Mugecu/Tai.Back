@@ -1,5 +1,6 @@
 ﻿using Tai.Authentications.DTO.UsersVO;
 using Tai.Authentications.Entities;
+using Tai.Authentications.Interfaces;
 
 namespace Tai.Authentications.DTO
 {
@@ -11,7 +12,7 @@ namespace Tai.Authentications.DTO
         public UserPasswordDTO UserPassword { get; set; }
         public TimeStampDTO TimeStamp { get; set; }
 
-        public UserDTO ToDto(User model) 
+        public UserDTO ToDto(User model)
         {
             UserNameSurname = new UserNameSurnameDTO().ToDto(model.UserNameSurname);
             UserLogin = new UserLoginDTO().ToDto(model.UserLogin);
@@ -24,9 +25,10 @@ namespace Tai.Authentications.DTO
 
         public User ToModel()
             => new User(
-                UserNameSurname.ToModel(),
-                UserLogin.ToModel(),
-                UserEmail.ToModel(),
-                UserPassword.ToModel());
+                    UserNameSurname.ToModel(),
+                    UserLogin.ToModel(),
+                    UserEmail.ToModel(),
+                    UserPassword.ToModel(),
+                    TimeStamp?.ToModel());
     }
 }

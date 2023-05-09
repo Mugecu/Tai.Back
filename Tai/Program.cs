@@ -6,6 +6,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Tai.Apis;
 using Tai.Authentications.Infrastucture;
+using Tai.Authentications.Interfaces;
+using Tai.Authentications.Services;
 
 namespace Tai
 {
@@ -54,10 +56,11 @@ namespace Tai
             app.AddLoginMaps();
             #endregion
 
-            #region User Section
-            new UserApi().Register(app);
+            #region User Section with DateTimeService
+            using var dateTimeServiceScope = app.Services.CreateScope();
+            var dateTimeService = dateTimeServiceScope.ServiceProvider.GetRequiredService<IDateTime>();
+            new UserApi(dateTimeService).Register(app);
             #endregion
-
 
             app.Run();
         }

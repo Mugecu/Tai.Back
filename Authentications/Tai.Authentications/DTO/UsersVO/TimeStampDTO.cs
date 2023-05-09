@@ -20,6 +20,6 @@ namespace Tai.Authentications.DTO.UsersVO
         }
 
         public TimeStamp ToModel()
-            => new TimeStamp(CreatedAt,UpdatedAt, LastVisit, DeletedAt);
+            => new TimeStamp(CreatedAt,UpdatedAt, LastVisit, DeletedAt, null);
     }
 }
