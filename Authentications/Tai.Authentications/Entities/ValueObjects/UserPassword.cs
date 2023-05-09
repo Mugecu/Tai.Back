@@ -5,9 +5,10 @@ namespace Tai.Authentications.Entities.ValueObjects
 {
     public class UserPassword : ValueObject<UserPassword>
     {
+        // добавить шифрование.
         public string Password { get;}
-
-        public UserPassword(string password)
+        private UserPassword() { }
+        internal UserPassword(string password)
         {
             Guard.CheckStringOnNullEmptyAndWhiteSpace(password, "Пустой пароль");
             Guard.CheckForPasswordLength(password, "Недостаточная длинна пароля.");
