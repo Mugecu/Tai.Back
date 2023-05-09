@@ -1,6 +1,6 @@
 ﻿using Common.Entities;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Tai.Authentications.DTO;
 using Tai.Authentications.Entities;
 
 namespace Tai
@@ -10,8 +10,8 @@ namespace Tai
         public static WebApplication? AddLoginMaps(this WebApplication? web)
         {
             //добавить userDTO дабы пароль на светился на верх.
-            web?.MapGet("api/authentication/login",  async ([FromBody] User user, Repository<User> repo)
-                => await repo.GetAsync(user.Id)  is User findedUser
+            web?.MapGet("api/authentication/login",  async ([FromBody] UserDTO userDto, Repository<User> repo)
+                => new UserDTO().ToDto( await repo.GetAsync(userDto.ToModel().Id))  is UserDTO findedUser
                     ? Results.Ok("Autorize")
                     : Results.Unauthorized());
 

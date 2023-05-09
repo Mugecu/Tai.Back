@@ -9,8 +9,8 @@ namespace Tai.Authentications.Entities.ValueObjects
         public DateTime? UpdatedAt { get; }
         public DateTime LastVisit { get;}
         public DateTime? DeletedAt { get;}
-
-        public TimeStamp(DateTime createdAt, DateTime? updatedAt, DateTime lastVisit, DateTime? deletedAt)
+        private TimeStamp() { }
+        internal TimeStamp(DateTime createdAt, DateTime? updatedAt, DateTime lastVisit, DateTime? deletedAt)
         {
             CreatedAt = createdAt
                 .CheckForCorrectDate(updatedAt.CheckForNullInDate() , "Дата обновления меньше даты создания.")

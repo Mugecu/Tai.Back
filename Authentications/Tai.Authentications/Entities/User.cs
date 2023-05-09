@@ -6,11 +6,13 @@ namespace Tai.Authentications.Entities
 {
     public class User : AggregateRoot
     {
-        public UserNameSurname UserNameSurname { get; private set; }
-        public UserLogin UserLogin { get; private set; }
-        public UserEmail UserEmail { get; private set; }
-        public UserPassword UserPassword { get; private set; }
-        public TimeStamp? TimeStamp { get; private set; }
+        public UserNameSurname UserNameSurname { get;  set; }
+        public UserLogin UserLogin { get;  set; }
+        public UserEmail UserEmail { get;  set; }
+        public UserPassword UserPassword { get;  set; }
+        public TimeStamp? TimeStamp { get;  set; }
+
+        private User() { }
 
         public User(
             UserNameSurname userNameSurname,
@@ -45,5 +47,17 @@ namespace Tai.Authentications.Entities
 
             return this;
         }
+
+        public void RenameUser(string name, string surname)
+            => UserNameSurname = new UserNameSurname(name, surname);
+
+        public void ChangeUserEmail(string emailName, string domainName)
+            => UserEmail = new UserEmail(emailName, domainName);
+
+        public void ChangeUserPassword(string password)
+            => UserPassword.ChangePassword(password);
+
+        public void ChangeUserLogin(string login)
+            => UserLogin.ChangeLogin(login);
     }
 }

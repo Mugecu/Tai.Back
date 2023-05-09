@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Tai.Apis;
 using Tai.Authentications.Infrastucture;
 
 namespace Tai
@@ -12,26 +15,9 @@ namespace Tai
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddDbContext<TaiDbContext>( options =>
-               {
-                   options.UseSqlite(builder.Configuration.GetConnectionString("SqLite"));
-               });
+            builder.Services.AddControllers().AddNewtonsoftJson();
 
-            // Add services to the container.
-            builder.Services.AddAuthorization();
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                options.TokenValidationParameters = new()
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                    ValidAudience = builder.Configuration["Jwt:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-                });
+            RegisterServices(builder);
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -39,7 +25,8 @@ namespace Tai
 
             #region AddAuthServices
             AddAuthenticationServices(builder);
-            AddAutenticationRepository(builder);
+            AddUserRepository(builder);
+            AddDateTimeService(builder);
             #endregion
 
             var app = builder.Build();
@@ -47,7 +34,7 @@ namespace Tai
             if (app.Environment.IsDevelopment())
             {
                 using var scope = app.Services.CreateScope();
-                var db = scope.ServiceProvider.GetRequiredService<TaiDbContext>();
+                var db = scope.ServiceProvider.GetRequiredService<TaiDbContext>();                
                 db.Database.EnsureCreated();
             }
 
@@ -63,14 +50,12 @@ namespace Tai
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
-
             #region Login Section
             app.AddLoginMaps();
             #endregion
 
             #region User Section
-            app.AddUserMaps();
+            new UserApi().Register(app);
             #endregion
 
 
