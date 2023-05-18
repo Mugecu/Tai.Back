@@ -18,14 +18,10 @@ namespace Tai.Programs.Infrastructure.Repositories
                 ? throw new Exception($"Программа с идентификатором {root.Id} уже существует.")
                 : (await _context.Set<TaiProgramm>().AddAsync(root)).Entity;
 
-        public override Task<TaiProgramm?> GetAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        public override async Task<TaiProgramm?> GetAsync(Guid id)
+            => await _context.Set<TaiProgramm>().FirstOrDefaultAsync(p => p.Id == id);
 
-        public override Task SaveAsync()
-        {
-            throw new NotImplementedException();
-        }
+        public override async Task SaveAsync()
+            => await _context.SaveChangesAsync();
     }
 }

@@ -62,7 +62,7 @@ namespace Tai.Apis
 
             if (updatedUser is null) { return Results.BadRequest("Отсутствуют данные для обновления."); }
 
-            updatedUser.Id = userId;
+            //updatedUser.Id = userId;
             var user = await userRepository.GetAsync(updatedUser.Id);
 
             if (user is null) { return Results.NotFound($@"Пользователь с идентификатором {updatedUser.Id} отсутствует."); }
