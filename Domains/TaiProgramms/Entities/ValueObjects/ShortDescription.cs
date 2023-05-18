@@ -1,17 +1,16 @@
 ﻿using Common.Entities;
-using System.Xml.Linq;
+using TaiProgramms.Guards;
 
-namespace TaiProgramms.Entities
+namespace TaiProgramms.Entities.ValueObjects
 {
     public class ShortDescription : ValueObject<ShortDescription>
     {
-        public string BriefDescription { get;}
+        public string BriefDescription { get; }
 
         public ShortDescription(string briefDescription)
         {
-            BriefDescription = (string.IsNullOrEmpty(briefDescription) || string.IsNullOrWhiteSpace(briefDescription))
-                ? throw new Exception("Заполните краткое описание программы.")
-                : briefDescription;
+            Guard.CheckStringOnNullOrEmpty(briefDescription, "Заполните краткое описание программы.");
+            BriefDescription = briefDescription;
         }
 
         protected override bool EqualsCore(ShortDescription valueObject)

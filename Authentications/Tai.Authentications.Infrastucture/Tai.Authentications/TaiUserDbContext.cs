@@ -5,10 +5,10 @@ using Tai.Authentications.Entities.ValueObjects;
 
 namespace Tai.Authentications.Infrastucture
 {
-    public class TaiDbContext : DbContext
+    public class TaiUserDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        public TaiDbContext(DbContextOptions<TaiDbContext> options):base(options) { }
+        public TaiUserDbContext(DbContextOptions<TaiUserDbContext> options):base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

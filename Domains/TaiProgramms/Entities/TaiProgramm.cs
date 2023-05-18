@@ -1,8 +1,9 @@
 ﻿using Common.Entities;
+using TaiProgramms.Entities.ValueObjects;
 
 namespace TaiProgramms.Entities
 {
-    public class TaiProgramm : Entity
+    public class TaiProgramm :AggregateRoot
     {
         public Title Title { get; private set; }
         public ShortDescription ShortDescription { get; private set; }

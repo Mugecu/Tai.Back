@@ -45,7 +45,7 @@ namespace Tai.Apis
 
             await userRepository.SaveAsync();
 
-            return user is User 
+            return user is User
                 ? Results.Ok(user)
                 : Results.BadRequest();
         }
@@ -56,7 +56,7 @@ namespace Tai.Apis
                     : Results.NotFound("Не существует.");
 
         [Authorize]
-        private async Task<IResult> Update([FromRoute]Guid userId, [FromBody] UserDTO userDto, Repository<User> userRepository)
+        private async Task<IResult> Update([FromRoute] Guid userId, [FromBody] UserDTO userDto, Repository<User> userRepository)
         {
             var updatedUser = userDto?.ToModel();
 

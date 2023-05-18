@@ -10,7 +10,7 @@ namespace Tai
     {
         public static void RegisterServices(WebApplicationBuilder builder)
         {
-            builder.Services.AddDbContext<TaiDbContext>(options =>
+            builder.Services.AddDbContext<TaiUserDbContext>(options =>
             {
                 options.UseSqlite(builder.Configuration.GetConnectionString("SqLite"));
             });
