@@ -1,6 +1,5 @@
 ﻿using Tai.Authentications.DTO.UsersVO;
 using Tai.Authentications.Entities;
-using Tai.Authentications.Interfaces;
 
 namespace Tai.Authentications.DTO
 {

@@ -25,7 +25,7 @@ namespace TaiProgramms.Entities
         public void ChangeDescription(string description)
             => Description = new Description(description);
 
-        // добавить монаду Options или MayBe. 
+        //TODO: добавить монаду Options или MayBe. 
         public TaiProgramm UpdateProgramm(string title, string shortDescription, string descripton)
         {
             ChangeProgrammName(title);

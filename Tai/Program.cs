@@ -62,6 +62,10 @@ namespace Tai
             new UserApi(dateTimeService).Register(app);
             #endregion
 
+            #region TaiProgramm Controller
+            new TaiProgrammApi().Register(app);
+            #endregion
+
             app.Run();
         }
     }
