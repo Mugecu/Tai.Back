@@ -1,21 +1,20 @@
 ﻿using Common.Entities;
+using TaiProgramms.Guards;
 
-namespace TaiProgramms.Entities
+namespace TaiProgramms.Entities.ValueObjects
 {
     public class Title : ValueObject<Title>
     {
-        public string Name { get;}
+        public string Name { get; }
 
         public Title(string name)
         {
-            Name = (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
-                ? throw new Exception("Заполните название программы.")
-                : name;
+            Guard.CheckStringOnNullOrEmpty(name, "Заполните название программы.");
+            Name = name;
         }
 
         protected override bool EqualsCore(Title valueObject)
             => Name == valueObject.Name;
-
 
         protected override int GetHashCodeCore()
             => Name.GetHashCode();

@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tai.Authentications.DTO;
 using Tai.Authentications.Entities;
-using Tai.Authentications.Entities.ValueObjects;
 using Tai.Authentications.Interfaces;
 
 namespace Tai.Apis
@@ -23,12 +22,12 @@ namespace Tai.Apis
                 .WithName("CreateUser")
                 .WithTags("Users");
 
-            app?.MapGet("api/users/{id:Guid}", GetById)
+            app?.MapGet("api/users/{userId:Guid}", GetById)
                 .Produces<UserDTO>(StatusCodes.Status200OK)
                 .WithName("GetUser")
                 .WithTags("Users");
 
-            app?.MapPut("api/users/{id:Guid}", Update)
+            app?.MapPut("api/users/{userId:Guid}", Update)
                 .Produces<IResult>(StatusCodes.Status200OK)
                 .WithName("UpdateUser")
                 .WithTags("Users");
@@ -45,24 +44,24 @@ namespace Tai.Apis
 
             await userRepository.SaveAsync();
 
-            return user is User 
+            return user is User
                 ? Results.Ok(user)
                 : Results.BadRequest();
         }
 
-        private async Task<IResult> GetById(Guid id, Repository<User> userRepository)
-            => await userRepository.GetAsync(id) is User user
+        private async Task<IResult> GetById(Guid userId, Repository<User> userRepository)
+            => await userRepository.GetAsync(userId) is User user
                     ? Results.Ok(user)
                     : Results.NotFound("Не существует.");
 
         [Authorize]
-        private async Task<IResult> Update([FromRoute]Guid userId, [FromBody] UserDTO userDto, Repository<User> userRepository)
+        private async Task<IResult> Update([FromRoute] Guid userId, [FromBody] UserDTO userDto, Repository<User> userRepository)
         {
             var updatedUser = userDto?.ToModel();
 
             if (updatedUser is null) { return Results.BadRequest("Отсутствуют данные для обновления."); }
 
-            updatedUser.Id = userId;
+            //updatedUser.Id = userId;
             var user = await userRepository.GetAsync(updatedUser.Id);
 
             if (user is null) { return Results.NotFound($@"Пользователь с идентификатором {updatedUser.Id} отсутствует."); }

@@ -1,6 +1,6 @@
 ﻿using Common.Entities;
 
-namespace TaiProgramms.Entities
+namespace TaiProgramms.Entities.ValueObjects
 {
     public class Description : ValueObject<Description>
     {

@@ -36,7 +36,7 @@ namespace Tai
             if (app.Environment.IsDevelopment())
             {
                 using var scope = app.Services.CreateScope();
-                var db = scope.ServiceProvider.GetRequiredService<TaiDbContext>();                
+                var db = scope.ServiceProvider.GetRequiredService<TaiUserDbContext>();                
                 db.Database.EnsureCreated();
             }
 
@@ -60,6 +60,10 @@ namespace Tai
             using var dateTimeServiceScope = app.Services.CreateScope();
             var dateTimeService = dateTimeServiceScope.ServiceProvider.GetRequiredService<IDateTime>();
             new UserApi(dateTimeService).Register(app);
+            #endregion
+
+            #region TaiProgramm Controller
+            new TaiProgrammApi().Register(app);
             #endregion
 
             app.Run();
