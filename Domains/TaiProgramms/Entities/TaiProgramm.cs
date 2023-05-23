@@ -1,8 +1,9 @@
 ﻿using Common.Entities;
+using TaiProgramms.Entities.ValueObjects;
 
 namespace TaiProgramms.Entities
 {
-    public class TaiProgramm : Entity
+    public class TaiProgramm :AggregateRoot
     {
         public Title Title { get; private set; }
         public ShortDescription ShortDescription { get; private set; }
@@ -24,7 +25,7 @@ namespace TaiProgramms.Entities
         public void ChangeDescription(string description)
             => Description = new Description(description);
 
-        // добавить монаду Options или MayBe. 
+        //TODO: добавить монаду Options или MayBe. 
         public TaiProgramm UpdateProgramm(string title, string shortDescription, string descripton)
         {
             ChangeProgrammName(title);

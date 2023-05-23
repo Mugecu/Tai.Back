@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tai.Authentications.DTO;
 using Tai.Authentications.Entities;
-using Tai.Authentications.Entities.ValueObjects;
 using Tai.Authentications.Interfaces;
 
 namespace Tai.Apis
@@ -23,12 +22,12 @@ namespace Tai.Apis
                 .WithName("CreateUser")
                 .WithTags("Users");
 
-            app?.MapGet("api/users/{id:Guid}", GetById)
+            app?.MapGet("api/users/{userId:Guid}", GetById)
                 .Produces<UserDTO>(StatusCodes.Status200OK)
                 .WithName("GetUser")
                 .WithTags("Users");
 
-            app?.MapPut("api/users/{id:Guid}", Update)
+            app?.MapPut("api/users/{userId:Guid}", Update)
                 .Produces<IResult>(StatusCodes.Status200OK)
                 .WithName("UpdateUser")
                 .WithTags("Users");
@@ -56,7 +55,7 @@ namespace Tai.Apis
                     : Results.NotFound("Не существует.");
 
         [Authorize]
-        private async Task<IResult> Update([FromRoute]Guid userId, [FromBody] UserDTO userDto, Repository<User> userRepository)
+        private async Task<IResult> Update([FromRoute] Guid userId, [FromBody] UserDTO userDto, Repository<User> userRepository)
         {
             var updatedUser = userDto?.ToModel();
 
