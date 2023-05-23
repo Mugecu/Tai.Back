@@ -45,14 +45,14 @@ namespace Tai.Apis
 
             await userRepository.SaveAsync();
 
-            return user is User 
+            return user is not null 
                 ? Results.Ok(user)
                 : Results.BadRequest();
         }
 
         private async Task<IResult> GetById(Guid id, Repository<User> userRepository)
             => await userRepository.GetAsync(id) is User user
-                    ? Results.Ok(user)
+                    ? Results.Ok(new UserDTO().ToDto(user))
                     : Results.NotFound("Не существует.");
 
         [Authorize]
@@ -62,7 +62,6 @@ namespace Tai.Apis
 
             if (updatedUser is null) { return Results.BadRequest("Отсутствуют данные для обновления."); }
 
-            updatedUser.Id = userId;
             var user = await userRepository.GetAsync(updatedUser.Id);
 
             if (user is null) { return Results.NotFound($@"Пользователь с идентификатором {updatedUser.Id} отсутствует."); }
