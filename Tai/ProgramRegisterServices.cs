@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Tai.Authentications.Infrastucture;
+using Tai.Programs.Infrastructure;
 
 namespace Tai
 {
@@ -11,6 +12,10 @@ namespace Tai
         public static void RegisterServices(WebApplicationBuilder builder)
         {
             builder.Services.AddDbContext<TaiUserDbContext>(options =>
+            {
+                options.UseSqlite(builder.Configuration.GetConnectionString("SqLite"));
+            });
+            builder.Services.AddDbContext<TaiProgrammDbContext>(options =>
             {
                 options.UseSqlite(builder.Configuration.GetConnectionString("SqLite"));
             });
