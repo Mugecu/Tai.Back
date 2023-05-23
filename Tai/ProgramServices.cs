@@ -1,9 +1,10 @@
 ﻿using Common.Entities;
-using Microsoft.EntityFrameworkCore;
 using Tai.Authentications.Entities;
 using Tai.Authentications.Infrastructure.Repositories;
 using Tai.Authentications.Interfaces;
 using Tai.Authentications.Services;
+using Tai.Programs.Infrastructure.Repositories;
+using TaiProgramms.Entities;
 
 namespace Tai
 {
@@ -16,9 +17,10 @@ namespace Tai
             return builder;
         }
 
-        private static WebApplicationBuilder? AddUserRepository(this WebApplicationBuilder? builder)
+        private static WebApplicationBuilder? AddRepositories(this WebApplicationBuilder? builder)
         {
             builder?.Services?.AddScoped<Repository<User>, UserRepository>();
+            builder?.Services?.AddScoped<Repository<TaiProgramm>, TaiProgrammRepository>();
 
             return builder;
         }

@@ -8,6 +8,7 @@ using Tai.Apis;
 using Tai.Authentications.Infrastucture;
 using Tai.Authentications.Interfaces;
 using Tai.Authentications.Services;
+using Tai.Programs.Infrastructure;
 
 namespace Tai
 {
@@ -27,7 +28,7 @@ namespace Tai
 
             #region AddAuthServices
             AddAuthenticationServices(builder);
-            AddUserRepository(builder);
+            AddRepositories(builder);
             AddDateTimeService(builder);
             #endregion
 
@@ -36,7 +37,10 @@ namespace Tai
             if (app.Environment.IsDevelopment())
             {
                 using var scope = app.Services.CreateScope();
-                var db = scope.ServiceProvider.GetRequiredService<TaiUserDbContext>();                
+                var db = scope.ServiceProvider.GetRequiredService<TaiUserDbContext>();
+                var programmDb = scope.ServiceProvider.GetRequiredService<TaiProgrammDbContext>();
+
+                db.Database.EnsureCreated();
                 db.Database.EnsureCreated();
             }
 

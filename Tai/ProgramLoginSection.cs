@@ -11,7 +11,7 @@ namespace Tai
         {
             //добавить userDTO дабы пароль на светился на верх.
             web?.MapGet("api/authentication/login",  async ([FromBody] UserDTO userDto, Repository<User> repo)
-                => new UserDTO().ToDto( await repo.GetAsync(userDto.ToModel().Id))  is UserDTO findedUser
+                => new UserDTO().ToDto( await repo.GetAsync(userDto.ToModel().Id)) is UserDTO findedUser
                     ? Results.Ok("Autorize")
                     : Results.Unauthorized());
 
