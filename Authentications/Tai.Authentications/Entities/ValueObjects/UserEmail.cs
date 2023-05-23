@@ -7,8 +7,8 @@ namespace Tai.Authentications.Entities.ValueObjects
     {
         public string EmailName { get; }
         public string DomainName { get; }
-
-        public UserEmail(string emailName, string domainName)
+        private UserEmail() { }
+        internal UserEmail(string emailName, string domainName)
         {
             EmailName = Guard.CheckStringValueOnNullEmptyAndWhiteSpace(emailName, "Пустое название почты");
             DomainName = Guard.CheckStringValueOnNullEmptyAndWhiteSpace( domainName, "Пустое доменное имя.");

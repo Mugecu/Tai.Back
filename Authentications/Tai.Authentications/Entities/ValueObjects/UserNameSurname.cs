@@ -6,8 +6,9 @@ namespace Tai.Authentications.Entities.ValueObjects
     {
         public string Name { get;}
         public string Surname { get;}
+        private UserNameSurname() { } 
 
-        public UserNameSurname( string name, string surname)
+        internal UserNameSurname( string name, string surname)
         {
             Name = Guard.CheckStringValueOnNullEmptyAndWhiteSpace(name, "Задайте корректное имя пользователя."); 
             Surname = Guard.CheckStringValueOnNullEmptyAndWhiteSpace(name, "Задайте корректное фамилию пользователя.");

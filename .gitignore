@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Tai/TaiDb.db3-wal
+/Tai/TaiDb.db3-shm
+/.gitignore
+/Tai/TaiDb.db3

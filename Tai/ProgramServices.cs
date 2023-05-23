@@ -11,17 +11,21 @@ namespace Tai
     {
         private static WebApplicationBuilder? AddAuthenticationServices(this WebApplicationBuilder? builder)
         {
-            builder?.Services?.AddScoped<IDateTime, DateTimeService>();
             builder?.Services?.AddScoped<ITokenService, TokenService>();
 
             return builder;
         }
 
-        private static WebApplicationBuilder? AddAutenticationRepository(this WebApplicationBuilder? builder)
+        private static WebApplicationBuilder? AddUserRepository(this WebApplicationBuilder? builder)
         {
-            // добавсть DbContext.
             builder?.Services?.AddScoped<Repository<User>, UserRepository>();
 
+            return builder;
+        }
+
+        private static WebApplicationBuilder? AddDateTimeService(this WebApplicationBuilder? builder)
+        {
+            builder?.Services?.AddScoped<IDateTime, DateTimeService>();
             return builder;
         }
     }
