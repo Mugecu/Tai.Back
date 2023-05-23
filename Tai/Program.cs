@@ -28,7 +28,7 @@ namespace Tai
 
             #region AddAuthServices
             AddAuthenticationServices(builder);
-            AddUserRepository(builder);
+            AddRepositories(builder);
             AddDateTimeService(builder);
             #endregion
 

@@ -17,7 +17,7 @@ namespace Tai
             return builder;
         }
 
-        private static WebApplicationBuilder? AddUserRepository(this WebApplicationBuilder? builder)
+        private static WebApplicationBuilder? AddRepositories(this WebApplicationBuilder? builder)
         {
             builder?.Services?.AddScoped<Repository<User>, UserRepository>();
             builder?.Services?.AddScoped<Repository<TaiProgramm>, TaiProgrammRepository>();
