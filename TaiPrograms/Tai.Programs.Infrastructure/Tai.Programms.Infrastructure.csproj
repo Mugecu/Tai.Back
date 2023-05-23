@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Domains\TaiProgramms\TaiProgramms.csproj" />
+    <ProjectReference Include="..\..\Domains\TaiProgramms\Tai.Programms.Domain.csproj" />
   </ItemGroup>
 
 </Project>
