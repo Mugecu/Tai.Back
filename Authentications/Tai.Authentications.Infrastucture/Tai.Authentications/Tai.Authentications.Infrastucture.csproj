@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Commons\Common\Common.csproj" />
     <ProjectReference Include="..\..\Tai.Authentications\Tai.Authentications.csproj" />
+    <ProjectReference Include="..\..\Tai.Authentications\Tai.Authentications.Domain.csproj" />
   </ItemGroup>
 
 </Project>
