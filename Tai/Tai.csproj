@@ -18,7 +18,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Authentications\Tai.Authentications.Infrastucture\Tai.Authentications\Tai.Authentications.Infrastucture.csproj" />
     <ProjectReference Include="..\Authentications\Tai.Authentications\Tai.Authentications.Domain.csproj" />
-    <ProjectReference Include="..\Domains\TaiProgramms\Tai.Programms.Domain.csproj" />
     <ProjectReference Include="..\TaiPrograms\Tai.Programs.Infrastructure\Tai.Programms.Infrastructure.csproj" />
   </ItemGroup>
 
